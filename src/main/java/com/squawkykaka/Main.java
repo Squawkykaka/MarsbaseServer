@@ -55,17 +55,18 @@ public class Main {
 
         globalEventHandler.addListener(PlayerSpawnEvent.class, event -> {
             final Player player = event.getPlayer();
-            player.setGameMode(GameMode.SURVIVAL);
+            player.setGameMode(GameMode.CREATIVE);
             PlayerSkin skinFromUsername = PlayerSkin.fromUsername(player.getUsername());
             player.setSkin(skinFromUsername);
             player.setLevel(100);
+            player.setFlying(true);
             if (player.getUsername().equals("Squawkykaka")) {
                 player.setPermissionLevel(4);
             }
         });
 
         // Start the server on port 25565
-        MojangAuth.init();
+//        MojangAuth.init();
         minecraftServer.start("0.0.0.0", 25565);
     }
 }
