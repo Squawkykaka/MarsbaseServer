@@ -53,7 +53,7 @@ public class MarsGenerator implements Generator {
                 unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height), blockType);
                 unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height-5), Block.STONE);
 
-                if (x == 1 && z == 0) {
+                if (start.x() == 0 && start.z() == 0) {
                     unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(128), Block.AMETHYST_BLOCK);
                 }
 
