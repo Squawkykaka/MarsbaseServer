@@ -1,12 +1,14 @@
 package com.squawkykaka;
 
 import com.squawkykaka.Generation.MarsGenerator;
+import com.squawkykaka.commands.GamemodeCommand;
 import com.squawkykaka.commands.TeleportCommand;
 import de.articdive.jnoise.core.api.modifiers.NoiseModifier;
 import de.articdive.jnoise.generators.noisegen.opensimplex.FastSimplexNoiseGenerator;
 import de.articdive.jnoise.pipeline.JNoise;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.MinecraftServer;
+import net.minestom.server.command.CommandManager;
 import net.minestom.server.coordinate.Point;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
@@ -31,7 +33,9 @@ public class Main {
     public static void main(String[] args) {
         MinecraftServer minecraftServer = MinecraftServer.init();
 
-        MinecraftServer.getCommandManager().register(new TeleportCommand());
+        CommandManager commandManager = MinecraftServer.getCommandManager();
+        commandManager.register(new TeleportCommand());
+        commandManager.register(new GamemodeCommand());
 
         // Create the instance
         InstanceManager instanceManager = MinecraftServer.getInstanceManager();
@@ -50,18 +54,17 @@ public class Main {
 
         globalEventHandler.addListener(PlayerSpawnEvent.class, event -> {
             final Player player = event.getPlayer();
-            player.setGameMode(GameMode.CREATIVE);
+            player.setGameMode(GameMode.SURVIVAL);
             PlayerSkin skinFromUsername = PlayerSkin.fromUsername(player.getUsername());
             player.setSkin(skinFromUsername);
             player.setLevel(100);
             if (player.getUsername().equals("Squawkykaka")) {
                 player.setPermissionLevel(4);
-                LOGGER.info("Operator Joined { " +  player.getUsername() + " }");
             }
         });
 
         // Start the server on port 25565
-        MojangAuth.init();
+//        MojangAuth.init();
         minecraftServer.start("0.0.0.0", 25565);
     }
 }

@@ -37,7 +37,8 @@ public class MarsGenerator implements Generator {
                 } else {
                     blockType = Block.RED_SANDSTONE;
                 }
-                unit.modifier().fill(bottom, bottom.add(1, 1, 1).withY(height), blockType);
+//                unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height), Block.STONE);
+                unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height+1), blockType);
 
             }
         }
