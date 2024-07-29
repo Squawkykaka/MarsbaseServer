@@ -15,6 +15,7 @@ import net.minestom.server.entity.Player;
 import net.minestom.server.entity.PlayerSkin;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.*;
+import net.minestom.server.event.trait.ItemEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.instance.*;
 import net.minestom.server.instance.block.Block;
@@ -64,7 +65,7 @@ public class Main {
         });
 
         // Start the server on port 25565
-//        MojangAuth.init();
+        MojangAuth.init();
         minecraftServer.start("0.0.0.0", 25565);
     }
 }
