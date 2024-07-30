@@ -1,11 +1,12 @@
 package com.squawkykaka.Generation;
 
-import com.squawkykaka.utils.MathUtils;
+import de.articdive.jnoise.core.api.modifiers.NoiseModifier;
 import de.articdive.jnoise.core.util.MathUtil;
 import de.articdive.jnoise.generators.noisegen.opensimplex.FastSimplexNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.perlin.PerlinNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.worley.WorleyNoiseGenerator;
 import de.articdive.jnoise.pipeline.JNoise;
+import net.minestom.server.utils.MathUtils;
 
 import java.util.Random;
 
@@ -25,11 +26,16 @@ public class GeneratorNoise {
                 .scale(0.01)
                 .build();
 
-        JNoise worleyNoise = JNoise.newBuilder()
-                .worley(WorleyNoiseGenerator.newBuilder().build())
-                .scale(0.05)
-                .build();
+        var simplexOutput = simplexNoise.evaluateNoise(x, y);
 
-        return simplexNoise.evaluateNoise(x, y) + worleyNoise.evaluateNoise(x, y) * 2;
+        // make the flat areas
+        if (simplexOutput < 0.2 && simplexOutput > 0.1) {
+            return simplexOutput*(simplexOutput*2);
+        } else if (simplexOutput < 0.1) {
+            return simplexOutput*2;
+        }
+
+        // The code to make the small mountains.
+        return simplexOutput*24;
     }
 }

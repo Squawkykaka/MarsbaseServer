@@ -21,7 +21,7 @@ public class MarsGenerator implements Generator {
         for (int x = 0; x < unit.size().x(); x++) {
             for (int z = 0; z < unit.size().z(); z++) {
                 Point bottom = start.add(x, 0, z);
-                double height = GeneratorNoise.getWorldNoiseAtPosition(bottom.x(), bottom.z()) * 16 ;
+                double height = GeneratorNoise.getWorldNoiseAtPosition(bottom.x(), bottom.z());
                 double textureHeight = GeneratorNoise.getTextureNoiseAtPosition(bottom.x(), bottom.z());
 
                 Block blockType;
@@ -35,9 +35,9 @@ public class MarsGenerator implements Generator {
                     blockType = Block.RED_SANDSTONE;
                 }
 
-                unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height), blockType);
-                unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height-5), Block.STONE);
-//                }
+                unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height+24), blockType);
+                unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(height-5+24), Block.SANDSTONE);
+                unit.modifier().fill(bottom, bottom.add(1, 0, 1).withY(-63), Block.BEDROCK);
             }
         }
     }
